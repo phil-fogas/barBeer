@@ -1,0 +1,6 @@
+  Categories:
+  {% for category in categories %}
+            
+				<a class="nav-link {% if catid == category.id %}active{% endif %}" href="{{ path('showBeerCategory', { id : category.id}) }}">{{category.name}}</a>
+			
+   {% endfor %}

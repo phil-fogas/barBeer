@@ -1,0 +1,33 @@
+{% if beer.country %}
+	<ul>
+		<li>Origine:<a class="nav-link active" href="{{ path('showBeerCountry', { id : beer.country.id }) }}"> {{ beer.country.name }} </a>
+ 		</li>
+	</ul>
+{% endif %}
+
+
+{% set normals = normal(beer) %}
+{% set specials = special(beer) %}
+{% if normals %}
+	<ul>
+		<li>
+			Categorie normale :
+			{% for category in normals %}
+				<li><a class="nav-link active" href="{{ path('showBeerCategory', { id : category.id }) }}">{{ category.name }} </a> </li>
+			{% endfor %}
+		</li>
+	</ul>
+{% endif %}
+{% if specials %}
+	<ul>
+		<li>
+			Categorie(s) speciale(s) :
+			{% for category in special(beer) %}
+				<li><a class="nav-link active" href="{{ path('showBeerCategory', { id : category.id }) }}">{{ category.name }} </a> </li>
+			{% endfor %}
+		</li>
+
+
+		</li>
+	</ul>
+{% endif %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+     <div class="container">
+    <header>
+    {% block header %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="nav-link " aria-current="page" href="{{ path('home') }}">Accueil</a>
+     
+  {{render(controller('App\\Controller\\BarController:mainMenu', { 
+    'routeName' : app.request.attributes.get('_route'),
+    'catId' : app.request.attributes.get('id') ?? null
+    }))}}  
+    </nav>
+    
+    {% endblock %}
+    </header>
+    <main class="row" >
+    <section class="col-2" >
+    {% block menu %}
+   <nav class="nav flex-column">
+  
+  <a class="nav-link" href="#">Link</a>
+
+    </nav>
+    {% endblock %}
+</section>
+    <section class="col card" >
+        {% block body %}{% endblock %}
+    </section>
+    </main>
+     <footer>   
+    {% block footer %}
+    
+    {% endblock %}
+    </footer>
+    </div>
+
+    </body>
+</html>
