@@ -27,10 +27,11 @@ class StaisticFixtures extends Fixture implements OrderedFixtureInterface
             $statistic = new Statistic();
             shuffle($beer);
             $statistic->setBeer($beer[0]);
+           // dump($beer);
            // shuffle($category);
            // $statistic->setcategory($category[0]);
            shuffle($client);
-           $statistic->setBeer($client[0]);
+           $statistic->setClient($client[0]);
            $statistic->setScore($faker->randomFloat(2,1, 20));
 
             $count--;

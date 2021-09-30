@@ -49,6 +49,11 @@ class Client
      */
     private $age;
 
+    /**
+     * @ORM\OneToOne(targetEntity=user::class, cascade={"persist", "remove"})
+     */
+    private $user;
+
 
 
     public function __construct()
@@ -147,6 +152,18 @@ class Client
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

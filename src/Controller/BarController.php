@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Beer;
 use App\Entity\Country;
 use App\Entity\Category;
+use App\Entity\Client;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,5 +65,18 @@ class BarController extends AbstractController
           'categories'=>$categories
         ]);
     }
-
+     /**
+     * @Route("/user", name="user")
+     */
+    public function showsClient(Client $client): response
+    {
+       
+       // dump($client);
+        return $this->render('client/index.html.twig', [
+          'client'=>$client,
+          'title'=>'client'
+          
+        ]);
+    }
+  
 }

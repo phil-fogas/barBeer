@@ -13,6 +13,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+    
     <body>
      <div class="container">
     <header>
@@ -24,6 +25,8 @@
     'routeName' : app.request.attributes.get('_route'),
     'catId' : app.request.attributes.get('id') ?? null
     }))}}  
+
+    <a class="nav-link " href="{{ path('app_login') }}">Login</a>
     </nav>
     
     {% endblock %}

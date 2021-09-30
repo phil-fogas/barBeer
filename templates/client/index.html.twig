@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<article>
+    <p>Id: {{ client.id }}</p>
+    <p>Non: {{ client.name }}</p>
+    <p>Email: {{ client.email }}</p>
+    <p>Poid: {{ client.weight }}</p>
+    <p>Age: {{ client.age }}</p>
+   
+ </article>
+
+{% endblock %}
