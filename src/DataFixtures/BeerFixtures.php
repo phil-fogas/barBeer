@@ -15,7 +15,7 @@ class BeerFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create('fr_FR');
         // on fixe le nombre de bière à insérer dans les variables d'environnements
         $count = $_ENV["APP_FIXTURES_NB_BEERS"] ?? 20;
 

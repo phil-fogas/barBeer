@@ -49,9 +49,17 @@ class Beer
      */
     private $price;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Statistic::class, mappedBy="Beer")
+     */
+    private $statistics;
+
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->statistics = new ArrayCollection();
+ 
     }
 
     public function getId(): ?int
@@ -145,4 +153,36 @@ class Beer
 
         return $this;
     }
+
+    /**
+     * @return Collection|Statistic[]
+     */
+    public function getStatistics(): Collection
+    {
+        return $this->statistics;
+    }
+
+    public function addStatistic(Statistic $statistic): self
+    {
+        if (!$this->statistics->contains($statistic)) {
+            $this->statistics[] = $statistic;
+            $statistic->setBeer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatistic(Statistic $statistic): self
+    {
+        if ($this->statistics->removeElement($statistic)) {
+            // set the owning side to null (unless already changed)
+            if ($statistic->getBeer() === $this) {
+                $statistic->setBeer(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }
