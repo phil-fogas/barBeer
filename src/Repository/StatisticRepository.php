@@ -61,3 +61,4 @@ class StatisticRepository extends ServiceEntityRepository
     } 
 
 
+}
