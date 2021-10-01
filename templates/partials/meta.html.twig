@@ -1,19 +1,3 @@
-						{% if is_granted('ROLE_USER') %}
-							 
-						<div class="from">
-					Note:
-						{% for stat in stat %}
-							
-						{% if beer.id == stat.Beer.id %}
-						{{ stat.score }}
-				
-						{% endif %}
-						{% endfor %}
-						
-					
-						</div>
-					{% endif %}
-
 
 {% if beer.country %}
 	<ul>
