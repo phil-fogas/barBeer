@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Catégorie {{ title }}
+	Biere {{ title }}
 {% endblock %}
 
 {% block body %}
 	<div class="row">
 		<div class="row">
-			<h1>Catégorie {{ title}}
+			<h1>Origine {{ title}}
 			</h1>
 			{% for beer in beers %}
 				<div class="col-sm-6">
 					<div class="card card__beers">
 						<div class="card-body">
 							<h5 class="card-title">
-							<a class="nav-link"  href="{{ path('showBeer', { id : beer.id}) }}">{{ beer.name }}</a>
+						<a class="nav-link"  href="{{ path('showBeer', { id : beer.id}) }}">{{ beer.name }}</a>
 							</h5>
 							{% if beer.publishedAt is defined %}
 								<p>Date de création :
@@ -25,16 +25,16 @@
 								{% if beer.price is defined  %}
 									Price:
 									{{ beer.price }}
-									&euro;
+									<i class="bi bi-currency-euro"></i>
 								{% endif %}
 
 								<div>
-    							Description: {{ beer.description ?? 'pas description'}}
+  								  Description: {{ beer.description ?? 'pas description'}}
     							</div>
 								<div>
-									<img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
+									  <img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
 								</div>
-								
+	
 								{% include 'partials/meta.html.twig' %}
 							
 						</div>

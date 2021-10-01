@@ -7,16 +7,14 @@
 {% block body %}
 	<div class="row">
 		<div class="row">
-			<h1>Biere {{ title}}
+			<h1>Biere {{ title }}
 			</h1>
-			{% for beer in beers %}
+			
 				<div class="col-sm-6">
 					<div class="card card__beers">
 						<div class="card-body">
 							<h5 class="card-title">
-								<a href="{{ path('home') }}">
-									{{ beer.name }}
-								</a>
+						{{ beer.name }}
 							</h5>
 							{% if beer.publishedAt is defined %}
 								<p>Date de création :
@@ -36,12 +34,12 @@
 								<div>
 									  <img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
 								</div>
-	
+								
 								{% include 'partials/meta.html.twig' %}
 							
 						</div>
 					</div>
 				</div>
-			{% endfor %}
+			
 		</div>
 {% endblock %}
