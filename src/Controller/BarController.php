@@ -24,6 +24,10 @@ class BarController extends AbstractController
      */
     public function index(): Response
     {
+        if(!empty($this->getUser())){
+            $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
+            $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
+            }
         $repository = $this->getDoctrine()->getRepository(Beer::class);
         $beers = $repository->findAll();
         //dd($beers);
@@ -31,7 +35,8 @@ class BarController extends AbstractController
         return $this->render('bar/index.html.twig', [
             
             'beers'=>$beers,
-            'title'=>"page d'accueil"
+            'title'=>"page d'accueil",
+            'stat'=>$stat??[]
         ]);
     }
 
