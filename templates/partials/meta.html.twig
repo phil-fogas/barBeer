@@ -30,7 +30,7 @@
 		<li>
 			Categorie normale :
 			{% for category in normals %}
-				<li><a class="nav-link active" href="{{ path('showBeerCategory', { id : category.id }) }}">{{ category.name }} </a> </li>
+				<li><a class="nav-link" href="{{ path('showBeerCategory', { id : category.id }) }}">{{ category.name }} </a> </li>
 			{% endfor %}
 		</li>
 	</ul>
@@ -40,7 +40,7 @@
 		<li>
 			Categorie(s) speciale(s) :
 			{% for category in special(beer) %}
-				<li><a class="nav-link active" href="{{ path('showBeerCategory', { id : category.id }) }}">{{ category.name }} </a> </li>
+				<li><a class="nav-link" href="{{ path('showBeerCategory', { id : category.id }) }}">{{ category.name }} </a> </li>
 			{% endfor %}
 		</li>
 
