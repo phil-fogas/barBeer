@@ -4,13 +4,21 @@ namespace App\Controller;
 use App\Entity\Beer;
 use App\Entity\Country;
 use App\Entity\Category;
-
+use App\Entity\Client;
+use App\Entity\User;
+use App\Entity\Statistic;
+use App\Form\StatisticType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Session;
+
 
 class BarController extends AbstractController
 {
+    
+       
+   
     /**
      * @Route("/", name="home")
      */
@@ -32,10 +40,19 @@ class BarController extends AbstractController
      */
     public function showBeerCountry(Country $country): Response
     {
-     
+        $from =$this->createForm(StatisticType::class);
+
+        if(!empty($this->getUser())){
+            $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
+            $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
+            }
+            
         return $this->render('beer/show.html.twig', [
             'beers'=>$country->getBeers() ?? [],
-            'title'=>$country->getName()
+            'title'=>$country->getName(),
+            'form'=>$from->createView(),
+            'stat'=>$stat??[]
+            
         ]);
     }
 
@@ -44,10 +61,19 @@ class BarController extends AbstractController
      */
     public function showBeerCategory(Category $category): Response
     {
+     $from =$this->createForm(StatisticType::class);
+
+     if(!empty($this->getUser())){
+     $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
+     $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
+     }
+     
      
         return $this->render('category/show.html.twig', [
             'beers'=>$category->getCategori() ?? [],
-            'title'=>$category->getName()
+            'title'=>$category->getName(),
+            'form'=>$from->createView(),
+            'stat'=>$stat??[]
         ]);
     }
    
@@ -64,5 +90,20 @@ class BarController extends AbstractController
           'categories'=>$categories
         ]);
     }
+    /**
+     * @Route("/user", name="user")
+     */
+    public function showsClient(): response
+    {      
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+       
+        $client=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]);
+        return $this->render('client/index.html.twig', [
+          'clients'=>$client??[],
+          'title'=>'client'
+          
+        ]);
+    }
 
+  
 }

@@ -1,6 +1,21 @@
+						{% if is_granted('ROLE_USER') %}
+							 
+						<div class="from">
+					Note:
+						{% for stat in stat %}
+							
+						{% if beer.id == stat.Beer.id %}
+						{{ stat.score }}
+				
+						{% endif %}
+						{% endfor %}
+						</div>
+					{% endif %}
+
+
 {% if beer.country %}
 	<ul>
-		<li>Origine:<a class="nav-link active" href="{{ path('showBeerCountry', { id : beer.country.id }) }}"> {{ beer.country.name }} </a>
+		<li><i class="bi bi-geo-alt"></i> Origine:<a class="nav-link active" href="{{ path('showBeerCountry', { id : beer.country.id }) }}"> {{ beer.country.name }} </a>
  		</li>
 	</ul>
 {% endif %}

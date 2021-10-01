@@ -30,8 +30,9 @@ class StaisticFixtures extends Fixture implements OrderedFixtureInterface
            // shuffle($category);
            // $statistic->setcategory($category[0]);
            shuffle($client);
-           $statistic->setBeer($client[0]);
+           $statistic->setClient($client[0]);
            $statistic->setScore($faker->randomFloat(2,1, 20));
+           $statistic->setTotalBeers($faker->numberBetween(1,10));
 
             $count--;
             $manager->persist($statistic);
