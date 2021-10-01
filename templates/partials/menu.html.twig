@@ -4,7 +4,7 @@
   <i class="bi bi-tags-fill"></i> Categories:
   {% for category in categories %}
             
-				<a class="nav-link {% if catid == category.id %}active{% endif %}" href="{{ path('showBeerCategory', { id : category.id}) }}">{{category.name}}</a>
+				<a class="nav-link {% if category.id and catid == category.id %}active{% endif %}" href="{{ path('showBeerCategory', { id : category.id}) }}">{{category.name}}</a>
 			
    {% endfor %}
 

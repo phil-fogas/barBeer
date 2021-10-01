@@ -86,12 +86,24 @@ class BarController extends AbstractController
     /**
      * @Route("/beer/{id}", name="showBeer")
      */
-    public function showBeer(Request $request,$id): Response
+
+    public function showBeer(Beer $beer,Request $request,$id): Response
     {
-      
-     $from =$this->createForm(StatisticType::class);
+        $entityManager=$this->getDoctrine()->getManager();
+        $repository=$entityManager->getRepository(Statistic::class);  
+        $new=$repository->findOneBy(['Beer'=>$id]);
+     $from =$this->createForm(StatisticType::class,$new);
      $from->handleRequest($request);
-        
+     
+     if ($from->isSubmitted())
+     {
+         $new=$from->getData();
+         $entityManager=$this->getDoctrine()->getManager();
+         $entityManager->persist($new);
+         $entityManager->flush();
+         return $this->redirectToRoute('home');
+     }  
+
      if(!empty($this->getUser())){
      $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
      $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    

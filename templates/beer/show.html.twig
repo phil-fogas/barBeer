@@ -10,7 +10,9 @@
 			<h1>Biere {{ title }}
 			</h1>
 			
-				<div class="col-sm-6">
+
+				<div class="col-sm">
+
 					<div class="card card__beers">
 						<div class="card-body">
 							<h5 class="card-title">
@@ -31,10 +33,19 @@
 								<div>
   								  Description: {{ beer.description ?? 'pas description'}}
     							</div>
-								<div>
+								<div class="col">
 									  <img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
 								</div>
-								
+
+				
+										{% for stat in stat %}
+							
+						{% if beer.id == stat.Beer.id %}
+						
+						{{ form(from) }}
+						{% endif %}
+						{% endfor %}
+
 								{% include 'partials/meta.html.twig' %}
 							
 						</div>
