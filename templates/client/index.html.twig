@@ -2,14 +2,22 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+
+
 {% block body %}
-<article>
+
+
+{% if is_granted('ROLE_USER') %}
+ {% for client in clients %}
+  <article>
     <p>Id: {{ client.id }}</p>
-    <p>Non: {{ client.name }}</p>
+    <p>Nom: {{ client.name }}</p>
     <p>Email: {{ client.email }}</p>
     <p>Poid: {{ client.weight }}</p>
     <p>Age: {{ client.age }}</p>
-   
- </article>
+   <p>Nombre de bieres: {{ totalBeers(client.id) }}</p>
+  </article>
+{% endfor %}
 
+{% endif %}
 {% endblock %}

@@ -27,7 +27,7 @@
 								{% if beer.price is defined  %}
 									Price:
 									{{ beer.price }}
-									&euro;
+									<i class="bi bi-currency-euro"></i>
 								{% endif %}
 
 								<div>
@@ -36,6 +36,7 @@
 								<div>
 									  <img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
 								</div>
+	
 								{% include 'partials/meta.html.twig' %}
 							
 						</div>

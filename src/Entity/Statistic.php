@@ -32,6 +32,11 @@ class Statistic
      */
     private $score;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $total_beers;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Statistic
     public function setScore(string $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getTotalBeers(): ?int
+    {
+        return $this->total_beers;
+    }
+
+    public function setTotalBeers(int $total_beers): self
+    {
+        $this->total_beers = $total_beers;
 
         return $this;
     }

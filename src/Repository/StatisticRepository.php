@@ -47,4 +47,17 @@ class StatisticRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function totalBeersByClient(int $id) {
+
+        return $this->createQueryBuilder('s')
+            ->select('sum(s.total_beers) as total')
+            ->join('s.client', 'c')
+            ->andWhere("s.client =:id")
+            ->setParameter('id', $id)
+            ->groupBy('s.client')
+            ->getQuery()
+            ->getOneOrNullResult();
+    } 
+
+
 }

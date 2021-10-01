@@ -2,7 +2,9 @@
 
 namespace App\Twig;
 
+use App\Entity\Client;
 use App\Entity\Beer;
+use App\Entity\Statistic;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
@@ -37,7 +39,12 @@ class Custom extends AbstractExtension
             }),
             new TwigFunction('normal', function (Beer $beer) {
                 return $this->manager->getRepository(Beer::class)->findByCatTerm('normal', $beer->getId());
-            })
+            }),
+            new TwigFunction('totalBeers', function($id) {
+                $totalBeers = $this->manager->getRepository(Statistic::class)->totalBeersByClient($id);
+                return $totalBeers['total'] ?? 0;
+              }),
+            
         ];
     }
 }
