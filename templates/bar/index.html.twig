@@ -24,10 +24,13 @@
       Prix: {{ beer.price }} &euro;
       {% endif %}
 
+  </div>
+    <div>
    
       Description: {{ beer.description ?? 'pas description'}}
       </div>
     <div>
+
     <img src="{{ asset('build/images/biere.jpg') }}" class="rounded mx-auto d-block" alt="biere" />
     </div>
 
