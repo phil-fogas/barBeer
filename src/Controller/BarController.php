@@ -24,10 +24,7 @@ class BarController extends AbstractController
      */
     public function index(): Response
     {
-        if(!empty($this->getUser())){
-            $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
-            $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
-            }
+  
         $repository = $this->getDoctrine()->getRepository(Beer::class);
         $beers = $repository->findAll();
         //dd($beers);
@@ -35,8 +32,7 @@ class BarController extends AbstractController
         return $this->render('bar/index.html.twig', [
             
             'beers'=>$beers,
-            'title'=>"page d'accueil",
-            'stat'=>$stat??[]
+            'title'=>"page d'accueil"
         ]);
     }
 
@@ -45,18 +41,12 @@ class BarController extends AbstractController
      */
     public function showBeerCountry(Country $country): Response
     {
-        $from =$this->createForm(StatisticType::class);
-
-        if(!empty($this->getUser())){
-            $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
-            $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
-            }
+     
             
         return $this->render('country/show.html.twig', [
             'beers'=>$country->getBeers() ?? [],
             'title'=>$country->getName(),
-            'from'=>$from->createView(),
-            'stat'=>$stat??[]
+          
             
         ]);
     }
@@ -66,21 +56,12 @@ class BarController extends AbstractController
      */
     public function showBeerCategory(Category $category,Request $request): Response
     {
-        $new=new Statistic();
-     $from =$this->createForm(StatisticType::class,$new);
-     $from->handleRequest($request);
-        
-     if(!empty($this->getUser())){
-     $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
-     $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
-     }
+      
      
      
         return $this->render('category/show.html.twig', [
             'beers'=>$category->getCategori() ?? [],
             'title'=>$category->getName(),
-            'from'=>$from->createView(),
-            'stat'=>$stat??[]
         ]);
     }
     /**
