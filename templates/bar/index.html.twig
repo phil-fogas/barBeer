@@ -14,21 +14,23 @@
     <a class="nav-link"  href="{{ path('showBeer', { id : beer.id}) }}">{{ beer.name }}</a>
     </h5>
 </header>
- <main>  
- {% if beer.publishedAt is defined %} 
-    <p>Date de création:{{ beer.publishedAt | date('d/m/Y')}}</p>
- {% endif %}  
+ <main> 
+   <div>
+      {% if beer.publishedAt is defined %} 
+       <p>Date de création:{{ beer.publishedAt | date('d/m/Y')}}</p>
+      {% endif %}  
 
-    {% if beer.price is defined  %}
-    Prix: {{ beer.price }} &euro;
-    {% endif %}
+      {% if beer.price is defined  %}
+      Prix: {{ beer.price }} &euro;
+      {% endif %}
 
+   
+      Description: {{ beer.description ?? 'pas description'}}
+      </div>
     <div>
-    Description: {{ beer.description ?? 'pas description'}}
+    <img src="{{ asset('build/images/biere.jpg') }}" class="rounded mx-auto d-block" alt="biere" />
     </div>
-    <div>
-    <img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
-    </div>
+
      {% include 'partials/meta.html.twig' %}
 
   
