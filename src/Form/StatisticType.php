@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Statistic;
-use App\Entity\Beer;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,9 +15,15 @@ class StatisticType extends AbstractType
     {
         $builder
             ->add('score')
-            ->add('Soumetre', SubmitType::class)
+            ->add('Voter', SubmitType::class)
         ;
     }
-
+    
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Statistic::class,
+        ]);
+    }
 
 }

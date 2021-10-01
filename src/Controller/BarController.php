@@ -11,7 +11,7 @@ use App\Form\StatisticType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Controller\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class BarController extends AbstractController
@@ -52,10 +52,10 @@ class BarController extends AbstractController
             $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
             }
             
-        return $this->render('beer/show.html.twig', [
+        return $this->render('country/show.html.twig', [
             'beers'=>$country->getBeers() ?? [],
             'title'=>$country->getName(),
-            'form'=>$from->createView(),
+            'from'=>$from->createView(),
             'stat'=>$stat??[]
             
         ]);
@@ -64,10 +64,12 @@ class BarController extends AbstractController
     /**
      * @Route("/category/{id}", name="showBeerCategory")
      */
-    public function showBeerCategory(Category $category): Response
+    public function showBeerCategory(Category $category,Request $request): Response
     {
-     $from =$this->createForm(StatisticType::class);
-
+        $new=new Statistic();
+     $from =$this->createForm(StatisticType::class,$new);
+     $from->handleRequest($request);
+        
      if(!empty($this->getUser())){
      $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
      $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
@@ -77,11 +79,32 @@ class BarController extends AbstractController
         return $this->render('category/show.html.twig', [
             'beers'=>$category->getCategori() ?? [],
             'title'=>$category->getName(),
-            'form'=>$from->createView(),
+            'from'=>$from->createView(),
             'stat'=>$stat??[]
         ]);
     }
-   
+    /**
+     * @Route("/beer/{id}", name="showBeer")
+     */
+    public function showBeer(Request $request,$id): Response
+    {
+      
+     $from =$this->createForm(StatisticType::class);
+     $from->handleRequest($request);
+        
+     if(!empty($this->getUser())){
+     $idclient=$this->getDoctrine()->getRepository(Client::class)->findBy(['user'=>$this->getUser()->getId()]); 
+     $stat=$this->getDoctrine()->getRepository(Statistic::class)->findBy(['client'=>$idclient[0]]);    
+     }
+     
+     $beer = $this->getDoctrine()->getRepository(Beer::class)->find($id);
+        return $this->render('beer/show.html.twig', [
+            'beer'=>$beer ?? [],
+            'title'=>$beer->getName(),
+            'from'=>$from->createView(),
+            'stat'=>$stat??[]
+        ]);
+    }   
      /**
      * @Route("/menu", name="menu")
      */
