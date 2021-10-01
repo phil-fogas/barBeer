@@ -49,10 +49,12 @@ class Client
      */
     private $age;
 
+
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      */
     private $user;
+
 
 
 
@@ -167,6 +169,7 @@ class Client
 
         return $this;
     }
+
 
    
 }

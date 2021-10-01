@@ -47,6 +47,7 @@ class StatisticRepository extends ServiceEntityRepository
         ;
     }
     */
+
     public function totalBeersByClient(int $id) {
 
         return $this->createQueryBuilder('s')
@@ -60,4 +61,3 @@ class StatisticRepository extends ServiceEntityRepository
     } 
 
 
-}
