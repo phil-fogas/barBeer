@@ -86,6 +86,7 @@ class BarController extends AbstractController
     /**
      * @Route("/beer/{id}", name="showBeer")
      */
+
     public function showBeer(Beer $beer,Request $request,$id): Response
     {
         $entityManager=$this->getDoctrine()->getManager();

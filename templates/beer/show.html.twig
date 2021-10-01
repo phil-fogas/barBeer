@@ -10,7 +10,9 @@
 			<h1>Biere {{ title }}
 			</h1>
 			
+
 				<div class="col-sm">
+
 					<div class="card card__beers">
 						<div class="card-body">
 							<h5 class="card-title">
@@ -34,6 +36,7 @@
 								<div class="col">
 									  <img src="{{ asset('build/images/biere.jpg') }}" class="img-thumbnail" alt="biere" />
 								</div>
+
 				
 										{% for stat in stat %}
 							
@@ -42,6 +45,7 @@
 						{{ form(from) }}
 						{% endif %}
 						{% endfor %}
+
 								{% include 'partials/meta.html.twig' %}
 							
 						</div>
